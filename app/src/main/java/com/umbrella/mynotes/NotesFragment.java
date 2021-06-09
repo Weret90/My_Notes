@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NotesFragment extends Fragment {
 
@@ -27,24 +28,17 @@ public class NotesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initList(view);
-    }
 
-    private void initList(View view) {
-        LinearLayout layoutView = (LinearLayout) view;
-
+        LinearLayout noteList = view.findViewById(R.id.note_container);
         ArrayList<Note> notes = NotesRepository.getNotes();
+        for (Note note : notes) {
+            View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.item_note_title, noteList, false);
 
-        // В этом цикле создаём элемент TextView,
-        // заполняем его значениями,
-        // и добавляем на экран.
-        // Кроме того, создаём обработку касания на элемент
-        for (int i = 0; i < notes.size(); i++) {
-            String title = notes.get(i).getTitle();
-            TextView textView = new TextView(getContext());
-            textView.setText(title);
-            textView.setTextSize(30);
-            layoutView.addView(textView);
+            TextView noteTitle = itemView.findViewById(R.id.titleName);
+            noteTitle.setText(note.getTitle());
+
+            noteList.addView(itemView);
         }
     }
 }
+
