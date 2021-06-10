@@ -1,5 +1,6 @@
 package com.umbrella.mynotes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +18,26 @@ import java.util.List;
 
 public class NotesFragment extends Fragment {
 
-    // При создании фрагмента укажем его макет
+    public interface OnNoteClicked {
+        void onNoteClicked(Note note);
+    }
+
+    private OnNoteClicked onNoteClicked;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnNoteClicked) {
+            onNoteClicked = (OnNoteClicked) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        onNoteClicked = null;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +53,15 @@ public class NotesFragment extends Fragment {
         ArrayList<Note> notes = NotesRepository.getNotes();
         for (Note note : notes) {
             View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.item_note_title, noteList, false);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onNoteClicked != null) {
+                        onNoteClicked.onNoteClicked(note);
+                    }
+                }
+            });
 
             TextView noteTitle = itemView.findViewById(R.id.titleName);
             noteTitle.setText(note.getTitle());
