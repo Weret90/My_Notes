@@ -54,12 +54,9 @@ public class NotesFragment extends Fragment {
         for (Note note : notes) {
             View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.item_note_title, noteList, false);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onNoteClicked != null) {
-                        onNoteClicked.onNoteClicked(note);
-                    }
+            itemView.setOnClickListener(v -> {
+                if (onNoteClicked != null) {
+                    onNoteClicked.onNoteClicked(note);
                 }
             });
 
