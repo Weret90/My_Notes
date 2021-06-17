@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Notes</string>
+    <string name="hint_press_day_of_week">Введите день недели для заметки</string>
+    <string name="hint_press_headline">Введите заголовок заметки</string>
+    <string name="hint_press_description">Введите описание заметки</string>
+    <string name="button_text_add_note">Добавить заметку</string>
+    <string name="simple_menu_option">Добавить заметку</string>
+    <string name="drawer_menu_option">О приложении</string>
+    <string name="app_info">Данное приложение было создано студентом образовательной платформы GeekBrains, факультета андроид-разработки в учебных целях. ФИО студента: Ермолаев А.Ф.</string>
 </resources>
