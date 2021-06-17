@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity implements NotesFragment.OnN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.notes_titles, new NotesFragment()).commit();
     }
 
     @Override
@@ -20,9 +22,12 @@ public class MainActivity extends AppCompatActivity implements NotesFragment.OnN
         if (isLandscape) {
             getSupportFragmentManager().beginTransaction().replace(R.id.note_description_fragment, NotesDescriptionFragment.newInstance(note)).commit();
         } else {
-            Intent intent = new Intent(this, NoteDescriptionActivity.class);
-            intent.putExtra(NoteDescriptionActivity.ARG_NOTE, note);
-            startActivity(intent);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.notes_titles, NotesDescriptionFragment.newInstance(note)).addToBackStack(null).commit();
+
+//            Intent intent = new Intent(this, NoteDescriptionActivity.class);
+//            intent.putExtra(NoteDescriptionActivity.ARG_NOTE, note);
+//            startActivity(intent);
         }
     }
 }
