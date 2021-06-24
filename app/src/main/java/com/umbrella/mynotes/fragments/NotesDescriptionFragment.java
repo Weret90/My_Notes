@@ -1,4 +1,4 @@
-package com.umbrella.mynotes;
+package com.umbrella.mynotes.fragments;
 
 import android.os.Bundle;
 
@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.umbrella.mynotes.Note;
+import com.umbrella.mynotes.R;
 
 public class NotesDescriptionFragment extends Fragment {
 

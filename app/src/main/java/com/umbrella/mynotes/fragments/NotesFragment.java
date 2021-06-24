@@ -1,12 +1,10 @@
-package com.umbrella.mynotes;
+package com.umbrella.mynotes.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,6 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.umbrella.mynotes.Note;
+import com.umbrella.mynotes.NotesAdapter;
+import com.umbrella.mynotes.NotesRepository;
+import com.umbrella.mynotes.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,22 +55,19 @@ public class NotesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LinearLayout noteList = view.findViewById(R.id.note_container);
-        ArrayList<Note> notes = NotesRepository.getNotes();
-        for (Note note : notes) {
-            View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.item_note_title, noteList, false);
-
-            itemView.setOnClickListener(v -> {
-                if (onNoteClicked != null) {
-                    onNoteClicked.onNoteClicked(note);
-                }
-            });
-
-            TextView noteTitle = itemView.findViewById(R.id.titleName);
-            noteTitle.setText(note.getTitle());
-
-            noteList.addView(itemView);
-        }
+        RecyclerView notesRecyclerView = view.findViewById(R.id.notes_recycle_view);
+        LinearLayoutManager manager = new LinearLayoutManager(requireContext());
+        notesRecyclerView.setLayoutManager(manager);
+        List<Note> notes = NotesRepository.getNotes();
+        NotesAdapter adapter = new NotesAdapter(notes);
+        notesRecyclerView.setAdapter(adapter);
+        adapter.setOnNoteClickListener(new NotesAdapter.OnNoteClickListener() {
+            @Override
+            public void onNoteClick(Note note) {
+                onNoteClicked.onNoteClicked(note);
+            }
+        });
     }
 }
+
 

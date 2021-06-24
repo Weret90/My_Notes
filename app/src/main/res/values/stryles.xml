@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="default_style">
+
+    <style name="note_description_default_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_margin">@dimen/default_margin</item>
         <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textStyle">italic</item>
     </style>
 
     <style name="add_note_style">

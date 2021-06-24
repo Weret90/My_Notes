@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".NotesDescriptionFragment">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/small_margin"
+    tools:context=".fragments.NotesDescriptionFragment">
 
-    <TextView
-        android:id="@+id/note_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/default_margin"
-        android:gravity="center"
-        android:padding="@dimen/default_padding"
-        android:textSize="@dimen/headline_text_size"
-        android:textStyle="bold"
-        tools:text="title" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/note_day_of_week"
-        style="@style/default_style"
-        tools:text="dayOfWeek" />
+        <TextView
+            android:id="@+id/note_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@android:color/holo_green_light"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:textSize="@dimen/headline_text_size"
+            android:textStyle="bold"
+            tools:text="title" />
 
-    <TextView
-        android:id="@+id/note_description"
-        style="@style/default_style"
-        tools:text="description" />
+        <TextView
+            android:id="@+id/note_day_of_week"
+            style="@style/note_description_default_style"
+            tools:text="dayOfWeek" />
 
+        <TextView
+            android:id="@+id/note_description"
+            style="@style/note_description_default_style"
+            tools:text="description" />
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>
