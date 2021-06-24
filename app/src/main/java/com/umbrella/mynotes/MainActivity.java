@@ -28,15 +28,16 @@ public class MainActivity extends AppCompatActivity implements NotesFragment.OnN
 
         NavigationView navigationView = findViewById(R.id.navigation_menu);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                drawerLayout.closeDrawer(GravityCompat.START);
-                getSupportFragmentManager().beginTransaction().replace(R.id.notes_titles, new InfoFragment()).addToBackStack(null).commit();
-                return true;
-            }
-        });
-
+        if (!getResources().getBoolean(R.bool.isLandscape)) {
+            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.notes_titles, new InfoFragment()).addToBackStack(null).commit();
+                    return true;
+                }
+            });
+        }
     }
 
     @Override
