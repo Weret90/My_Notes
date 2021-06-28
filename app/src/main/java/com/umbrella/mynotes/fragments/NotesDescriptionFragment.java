@@ -45,10 +45,11 @@ public class NotesDescriptionFragment extends Fragment {
         TextView description = view.findViewById(R.id.note_description);
         TextView dayOfWeek = view.findViewById(R.id.note_day_of_week);
 
-        Note note = getArguments().getParcelable(ARG_NOTE);
-
-        title.setText(note.getTitle());
-        description.setText(note.getDescription());
-        dayOfWeek.setText(note.getDayOfWeek());
+        if (getArguments().getParcelable(ARG_NOTE) != null) {
+            Note note = getArguments().getParcelable(ARG_NOTE);
+            title.setText(note.getTitle());
+            description.setText(note.getDescription());
+            dayOfWeek.setText(note.getDayOfWeek());
+        }
     }
 }

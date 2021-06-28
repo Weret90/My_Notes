@@ -41,8 +41,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Note note = notes.get(position);
-        holder.dayOfWeek.setText(note.getDayOfWeek());
-        holder.title.setText(note.getTitle());
+        holder.bind(note);
     }
 
     @Override
@@ -67,6 +66,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
                     }
                 }
             });
+        }
+
+        public void bind(Note note) {
+            dayOfWeek.setText(note.getDayOfWeek());
+            title.setText(note.getTitle());
         }
     }
 }
