@@ -7,4 +7,7 @@
     <string name="simple_menu_option">Добавить заметку</string>
     <string name="drawer_menu_option">О приложении</string>
     <string name="app_info">Данное приложение было создано студентом образовательной платформы GeekBrains, факультета андроид-разработки в учебных целях. ФИО студента: Ермолаев А.Ф.</string>
+    <string name="action_change">Редактировать заметку</string>
+    <string name="action_delete">Удалить заметку</string>
+    <string name="save_changes_of_note">Сохранить изменения</string>
 </resources>

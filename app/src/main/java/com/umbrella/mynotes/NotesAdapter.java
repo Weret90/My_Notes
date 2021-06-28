@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -14,13 +15,28 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
 
     private List<Note> notes;
     private OnNoteClickListener onNoteClickListener;
+    private OnNoteLongClickListener onNoteLongClickListener;
+    private Fragment fragment;
 
-    public NotesAdapter(List<Note> notes) {
+    public NotesAdapter(List<Note> notes, Fragment fragment) {
         this.notes = notes;
+        this.fragment = fragment;
     }
 
     public interface OnNoteClickListener {
         void onNoteClick(Note note);
+    }
+
+    public interface OnNoteLongClickListener {
+        void onNoteLongClick(Note note, int index);
+    }
+
+    public OnNoteLongClickListener getOnNoteLongClickListener() {
+        return onNoteLongClickListener;
+    }
+
+    public void setOnNoteLongClickListener(OnNoteLongClickListener onNoteLongClickListener) {
+        this.onNoteLongClickListener = onNoteLongClickListener;
     }
 
     public void setOnNoteClickListener(OnNoteClickListener onNoteClickListener) {
@@ -29,6 +45,10 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
 
     public OnNoteClickListener getOnNoteClickListener() {
         return onNoteClickListener;
+    }
+
+    public void remove(Note longClickedNote) {
+        notes.remove(longClickedNote);
     }
 
     @NonNull
@@ -55,6 +75,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            fragment.registerForContextMenu(itemView);
             title = itemView.findViewById(R.id.item_note_title);
             dayOfWeek = itemView.findViewById(R.id.item_note_day_of_week);
 
@@ -64,6 +85,17 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.MyViewHolder
                     if (onNoteClickListener != null) {
                         onNoteClickListener.onNoteClick(notes.get(getAdapterPosition()));
                     }
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    itemView.showContextMenu();
+                    if (getOnNoteLongClickListener() != null) {
+                        int index = getAdapterPosition();
+                        onNoteLongClickListener.onNoteLongClick(notes.get(index), index);
+                    }
+                    return true;
                 }
             });
         }
